@@ -3,6 +3,11 @@ body
 	font-family: Tahoma;
 }
 
+.odd {
+	background-color: #FCFCCA;
+}
+/* index.php */
+
 #title
 {
 	width: 100%;
@@ -25,3 +30,55 @@ body
 .content-container a {
 	text-decoration: none;
 }
+
+/* end index.php */
+
+/* searchcity.php */
+#searchcity-cont {
+	width: 100%;
+	text-align: center;
+}
+
+#mycity {
+	width: 50%;
+	height: 40px;
+	font-size: 20px;
+	margin: 10px;
+	text-align: center;
+}
+
+#submitCity {
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: burlywood;
+	font-size: 20px;
+}
+
+#searchResultContainer {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.mytitle {
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.search-table {
+	width: 100%;
+	font-size: 18px;
+}
+
+.search-table-title {
+	height: 40px;
+	text-align: center;
+	font-size: 24px;
+}
+
+.search-table tr {
+	height: 35px;
+	padding: 3px 0 3px 6px;
+}
+
+/* end searchcity.php */

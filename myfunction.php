@@ -1,4 +1,6 @@
 <?php
+	include "config.php";
+	
 	/**
 	  * Function to get profanity words from the text
 	  * 
@@ -42,5 +44,89 @@
 		$result = preg_replace('/-+/', '-', $text);
 		
 		return $result;
+	}
+	
+	/**
+	  * Function to call API with GET method
+	  *
+	  * param $url, $header
+	  * return json
+	  */
+	function call_api($url, $header=null) {
+		$ch = curl_init();  
+	 
+		curl_setopt($ch,CURLOPT_URL,$url);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+		if ($header != null) {
+			curl_setopt($ch,CURLOPT_HTTPHEADER, $header); 
+		}
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		$output=curl_exec($ch);
+	 
+		curl_close($ch);
+		return $output;
+	}
+	
+	/**
+	  * Function to get current weather through API
+	  *
+	  * API openweather
+	  * return void
+	  */
+	function get_weather_from_api($city) {
+		$api_key = OPENWEATHERMAP_APIKEY;
+		
+		$api_url = sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", $city, $api_key);
+		
+		$result = call_api($api_url);
+		
+		$myresult = json_decode($result);
+		
+		return $myresult;
+	}
+	
+	/**
+	  * Function to get all current exchange rate to USD
+	  *
+	  * API openexchangerate
+	  * updated per hour
+	  * return void
+	  */
+	function get_exchangerate_from_api() {
+		$api_key = OPENEXCHANGERATES_APIKEY;
+		
+		$api_url = sprintf("http://openexchangerates.org/api/latest.json?app_id=%s", $api_key);
+		
+		$result = call_api($api_url);
+		
+		$myresult = json_decode($result);
+		
+		return $myresult;
+	}
+	
+	/**
+	  * Function to get all country information
+	  * API restcountries
+	  * param countrycode
+	  * return void
+	  */
+	function get_country_info_from_countrycode($countrycode) {
+		$api_url = sprintf("https://restcountries-v1.p.mashape.com/alpha/%s", $countrycode);
+		
+		$result = call_api($api_url, array("X-Mashape-Key : " . RESTCOUNTRIES_APIKEY, "Accept : application/json"));
+		
+		$myresult = json_decode($result);
+		
+		return $myresult;
+			
+	}
+	
+	/**
+	  * Function to get photos from flickr
+	  *
+	  * return void
+	  */
+	function get_photos_from_flickr() {
+		
 	}
 ?>
